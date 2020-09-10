@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+/**
+ * CONTENTS
+ *
+ * SETTINGS
+ * variables.......css for tooltip
+ *
+ * BASE
+ * base elements...css for basing elements
+ *
+ * DEMO
+ * demo styles.....styles for wrapper and button
+ *
+ * COMPONENTS
+ * tooltip.........styles for tooltip
+ */
+
+/**
+ * Variables for tooltip components
+ */
+:root {
+  --tooltip-border-radius: 3px;
+  --tooltip-color: #fff;
+  --tooltip-bg-color: 47, 47, 47;
+  --tooltip-max-width: 24rem;
+}
+
+/**
+ * Base styles
+ */
+html {
+  font-family: "Roboto", BlinkMacSystemFont,-apple-system,"Segoe UI","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
+  font-size: 16px;
+}
+
+/**
+ * Demo styles
+ */
+.wrapper {
+  margin: 0 auto;
+  max-width: 1420px;
+  height: 960px;
+  text-align: center;
+}
+
+.button {
+  padding-left: .75em;
+  padding-right: .75em;
+  font-size: 1rem;
+  height: 2.25em;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  box-shadow: none;
+  border-radius: 3px;
+}
+
+.wrapper .button {
+  margin-top : 150px;
+}
+
+/**
+ * Tooltip styles
+ */
+.tooltip {
+  position: relative;
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+  position: absolute;
+  display: inline-block;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+.tooltip:hover::before {
+   padding: .4rem .8rem;
+   opacity: 0;
+   content: attr(data-tooltip);
+   white-space: nowrap;
+   text-overflow: ellipsis;
+   font-size: 14px;
+   color: var(--tooltip-color);
+   transform: translate(-50%, 1rem);
+   background: rgba(var(--tooltip-bg-color), 0.9);
+   border-radius: var(--tooltip-border-radius);
+   overflow: hidden;
+}
+
+.tooltip:hover::after {
+  content: "";
+  border-style: solid;
+  border-width: .5rem;
+}
+
+.tooltip:focus::before, .tooltip:hover::before {
+  top: auto;
+  bottom: 100%;
+  left: 50%;
+  opacity: 1;
+  transform: translate(-50%, -0.5rem);
+}
+
+.tooltip:focus::after, .tooltip:hover::after {
+  margin-left: -.5rem;
+  margin-top: -.5rem;
+  top: 0;
+  bottom: auto;
+  left: 50%;
+  opacity: 1;
+  border-color: rgba(var(--tooltip-bg-color), 0.9) transparent transparent transparent;
+}
+
+/**
+ * Tooltip right
+ */
+.tooltip.is-tooltip-right::before {
+  top: auto;
+  bottom: 50%;
+  left: 100%;
+  right: auto;
+  transform: translate(-1rem, 50%);
+}
+.tooltip.is-tooltip-right:focus::before,
+.tooltip.is-tooltip-right:hover::before {
+  transform: translate(0.5rem, 50%);
+}
+.tooltip.is-tooltip-right:focus::after,
+.tooltip.is-tooltip-right:hover::after {
+  top: 50%;
+  left: 100%;
+  right: auto;
+  border-color: transparent rgba(var(--tooltip-bg-color), 0.9) transparent transparent;
+}
+
+/**
+ * Tooltip left
+ */
+.tooltip.is-tooltip-left::before {
+  top: auto;
+  bottom: 50%;
+  left: auto;
+  right: 100%;
+  transform: translate(1rem, 50%);
+}
+.tooltip.is-tooltip-left:focus::before,
+.tooltip.is-tooltip-left:hover::before {
+  transform: translate(-0.5rem, 50%);
+}
+.tooltip.is-tooltip-left:focus::after,
+.tooltip.is-tooltip-left:hover::after {
+  top: 50%;
+  left: auto;
+  right: calc(100% - .5rem);
+  border-color: transparent transparent transparent rgba(var(--tooltip-bg-color), 0.9);
+}
+
+/**
+ * Tooltip bottom
+ */
+.tooltip.is-tooltip-bottom::before {
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, -1rem);
+}
+.tooltip.is-tooltip-bottom:focus::before,
+.tooltip.is-tooltip-bottom:hover::before {
+  transform: translate(-50%, 0.5rem);
+}
+.tooltip.is-tooltip-bottom:focus::after,
+.tooltip.is-tooltip-bottom:hover::after {
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+  right: auto;
+  border-color: transparent transparent rgba(var(--tooltip-bg-color), 0.9) transparent;
+}
+
+/**
+ * Tooltip multiline
+ */
+.tooltip.is-tooltip-multiline::before {
+  min-width: var(--tooltip-max-width);
+  text-overflow: clip;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/**
+ * Tooltip bg-color
+ */
+.is-info.tooltip:hover::before,
+.is-info.tooltip:focus::after,
+.is-info.tooltip:hover::after {
+  --tooltip-bg-color: 32,156,238;
+}
+
+.is-warning.tooltip:hover::before,
+.is-warning.tooltip:focus::after,
+.is-warning.tooltip:hover::after {
+  --tooltip-bg-color: 246,185,59;
+}
+
+.is-danger.tooltip:hover::before,
+.is-danger.tooltip:focus::after,
+.is-danger.tooltip:hover::after {
+  --tooltip-bg-color: 235,47,6;
+}
